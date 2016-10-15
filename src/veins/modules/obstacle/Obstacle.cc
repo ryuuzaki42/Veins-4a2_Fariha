@@ -122,9 +122,9 @@ double Obstacle::calculateAttenuation(const Coord& senderPos, const Coord& recei
 	double numWalls = intersectAt.size();
 
 	// for distance calculation, make sure every other pair of points marks transition through matter and void, respectively.
-	//if (senderInside) intersectAt.insert(0);
-	//if (receiverInside) intersectAt.insert(1);
-	//ASSERT((intersectAt.size() % 2) == 0);
+	if (senderInside) intersectAt.insert(0);
+	if (receiverInside) intersectAt.insert(1);
+	ASSERT((intersectAt.size() % 2) == 0);
 
 	// sum up distances in matter.
 	double fractionInObstacle = 0;
