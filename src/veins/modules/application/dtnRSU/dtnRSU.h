@@ -62,7 +62,6 @@ class dtnRSU : public BaseWaveApplLayerDTNRSU {
         simtime_t lastPacketReception;
 		long nbPacketsSent;
         long nbPacketsReceived;
-        cMessage * delayTimer;
 		 int nbPackets ;
 		 int sentPackets;
 	        simtime_t tempsrecu;

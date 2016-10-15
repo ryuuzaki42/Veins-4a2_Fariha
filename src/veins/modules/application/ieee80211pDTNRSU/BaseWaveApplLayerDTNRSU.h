@@ -171,6 +171,7 @@ std::string chaine ="";
         simtime_t tempsenvoie;
 
 		cMessage* sendBeaconEvt;
+        cMessage * delayTimer;
 
 		WaveAppToMac1609_4Interface* myMac;
 
