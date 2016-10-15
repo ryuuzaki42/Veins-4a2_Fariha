@@ -85,6 +85,7 @@ void BaseWaveApplLayerDTNRSU::initialize(int stage) {
 		if (sendBeacons) {
 			scheduleAt(simTime() + offSet, sendBeaconEvt);
 		}
+		std::cout << findHost()->getFullName() << " entered in the scenario at: " << simTime() << endl;
 
 	}
 }
@@ -92,7 +93,7 @@ void BaseWaveApplLayerDTNRSU::initialize(int stage) {
 
 WaveShortMessage*  BaseWaveApplLayerDTNRSU::prepareWSM(std::string name, int lengthBits, t_channel channel, int priority, int rcvId, int serial, float nbcopysaved) {
 
-	WaveShortMessage* wsm =		new WaveShortMessage(name.c_str());
+	WaveShortMessage* wsm = new WaveShortMessage(name.c_str());
 	wsm->addBitLength(headerLength);
 	wsm->addBitLength(lengthBits);
 
@@ -148,9 +149,11 @@ void BaseWaveApplLayerDTNRSU::handleLowerMsg(cMessage* msg) {
 	WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
 	ASSERT(wsm);
 
-	EV <<" The type of the received message is:  " << wsm->getName() << "'\n";
+	EV <<" The type of the received message is:  " << wsm->getName() << "\n";
+	std::cout << findHost()->getFullName() << "received message: " << wsm->getName() << " at: " << simTime() << endl;
 
 	if (std::string(wsm->getName()) == "beacon") {
+	    std::cout << findHost()->getFullName() << " data received at: " << simTime() << endl;
 		onBeacon(wsm);
 	}
 	else if (std::string(wsm->getName()) == "data") {
@@ -163,6 +166,7 @@ void BaseWaveApplLayerDTNRSU::handleLowerMsg(cMessage* msg) {
 	   	}
 	else {
 		DBG << "unknown message (" << wsm->getName() << ")  received\n";
+		std::cout << "unknown message (" << wsm->getName() << ")  received\n";
 	}
 	delete(msg);
 }
@@ -171,6 +175,7 @@ void BaseWaveApplLayerDTNRSU::handleSelfMsg(cMessage* msg) {
 	switch (msg->getKind()) {
 		case SEND_BEACON_EVT: {
 		    EV << "11111111111111111111111111111111111  '\n";
+		    std::cout << findHost()->getFullName() << " SEND_BEACON_EVT at:" << simTime() << endl;
 			sendWSM(prepareWSM("beacon", beaconLengthBits, type_CCH, beaconPriority, 0, -1, 0));
 			scheduleAt(simTime() + par("beaconInterval").doubleValue(), sendBeaconEvt);
 			break;
@@ -178,7 +183,9 @@ void BaseWaveApplLayerDTNRSU::handleSelfMsg(cMessage* msg) {
 		
 		case SEND_DATA_TIMER: {
 		    EV << "333333333333333333333333333333333333333 \n";
-		    std::cerr << "send data timer";
+		    std::cout << findHost()->getFullName() << " SEND_DATA_TIMER at:" << simTime() << endl;
+
+		    //std::cerr << "send data timer";
 		    EV << "SEND DATA TIMER\n";
 		    WaveShortMessage* wsm = new WaveShortMessage();
 
@@ -186,6 +193,7 @@ void BaseWaveApplLayerDTNRSU::handleSelfMsg(cMessage* msg) {
 		    wsm->setWsmData(donnee.c_str());
 		    sendMessage(wsm->getWsmData());
 
+		    scheduleAt(simTime() + 1, delayTimer);
 
 			break;
 		}
@@ -201,6 +209,7 @@ void BaseWaveApplLayerDTNRSU::handleSelfMsg(cMessage* msg) {
 void BaseWaveApplLayerDTNRSU::sendMessage(std::string donnee) {
 	
 	debugEV<< "Sending data packet!\n"<< donnee << "'\n";
+	std::cout << findHost()->getFullName() << " Sending data packet! ("<< donnee << " at: " << simTime() << endl;
 	
 	sentMessage = true;
 

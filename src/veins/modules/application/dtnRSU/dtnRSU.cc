@@ -72,13 +72,15 @@ existe = false;
 stop = false;
 stopdata = false;
 
-
-			scheduleAt(simTime() +uniform(initializationTime, initializationTime + 2), delayTimer);
+			//scheduleAt(simTime() +uniform(initializationTime, initializationTime + 2), delayTimer);
+			scheduleAt(simTime() + 1, delayTimer);
 	}
 }
 
 void dtnRSU::onBeacon(WaveShortMessage* wsm) {
     EV << "222222222222222222222222222222222222 \n";
+
+    std::cout << findHost()->getFullName() << " onBeacon at: " << simTime();
 
     EV << "I have received a beacon! ";
     
@@ -87,6 +89,7 @@ void dtnRSU::onBeacon(WaveShortMessage* wsm) {
 void dtnRSU::onData(WaveShortMessage* wsm) {
 
     EV << "44444444444444444444444444444444  \n";
+    std::cout << findHost()->getFullName() << " onData at: " << simTime();
 
 	findHost()->getDisplayString().updateWith("r=16,green");
 	annotations->scheduleErase(1, annotations->drawLine(wsm->getSenderPos(), mobility->getPositionAt(simTime()), "blue"));
