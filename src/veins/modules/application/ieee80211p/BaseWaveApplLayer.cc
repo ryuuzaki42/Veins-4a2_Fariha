@@ -108,6 +108,7 @@ void BaseWaveApplLayer::handleLowerMsg(cMessage* msg) {
 		onBeacon(wsm);
 	}
 	else if (std::string(wsm->getName()) == "data") {
+	    std::cout << findHost()->getFullName() << "data received" << endl;
 		onData(wsm);
 	}
 	else {
