@@ -43,6 +43,8 @@ void TraCIDemoRSU11p::onBeacon(WaveShortMessage* wsm) {
 void TraCIDemoRSU11p::onData(WaveShortMessage* wsm) {
     EV << "666666666666666666666  \n";
 
+    std::cout << "data on rsu" << endl;
+    exit(1);
 	findHost()->getDisplayString().updateWith("r=16,green");
 
 	annotations->scheduleErase(1, annotations->drawLine(wsm->getSenderPos(), mobi->getCurrentPosition(), "blue"));

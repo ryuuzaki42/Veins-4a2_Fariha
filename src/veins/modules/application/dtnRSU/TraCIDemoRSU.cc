@@ -42,12 +42,13 @@ void TraCIDemoRSU::initialize(int stage) {
 
 void TraCIDemoRSU::onBeacon(WaveShortMessage* wsm) {
     EV << "77777777777777777777  \n";
-    exit(3);
-
+    std::cout << findHost()->getFullName() << " onBeacon at: " << simTime();
 }
 
 void TraCIDemoRSU::onData(WaveShortMessage* wsm) {
     EV << "666666666666666666666  \n";
+    std::cout << findHost()->getFullName() << " onData at: " << simTime();
+    exit(1);
 
 	findHost()->getDisplayString().updateWith("r=16,green");
 
@@ -80,5 +81,3 @@ void TraCIDemoRSU::sendWSM(WaveShortMessage* wsm) {
 void TraCIDemoRSU::onACK(WaveShortMessage* wsm) {
 
 }
-
-
