@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- debug config -->
+<launch>
+	<copy file="testqgis.net.xml" />
+	<copy file="testqgis.rou.xml" />
+	<copy file="testqgis.poly.xml" />
+	<copy file="testqgis.sumo.cfg" type="config" />
+</launch>
+
