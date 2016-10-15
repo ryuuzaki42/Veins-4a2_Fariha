@@ -364,7 +364,7 @@ void AnnotationManager::show(const Annotation* annotation) {
 	}
 	else if (const Polygon* p = dynamic_cast<const Polygon*>(annotation)) {
 
-		ASSERT(p->coords.size() >= 1);
+		ASSERT(p->coords.size() >= 2); //1
 
 		if (ev.isGUI()) {
 #if OMNETPP_CANVAS_VERSION == 0x20140709
