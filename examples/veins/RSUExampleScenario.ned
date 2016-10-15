@@ -19,21 +19,6 @@ import org.car2x.veins.nodes.Scenario;
 network RSUExampleScenario extends Scenario
 {
     submodules:
-        rsu[1]: RSU {
-            @display("p=150,140;b=10,10,oval");
-        }
-        rsu[2]: RSU {
-            @display("p=150,140;b=10,10,oval");
-        }
-        rsu[3]: RSU {
-            @display("p=150,140;b=10,10,oval");
-        }
-        rsu[4]: RSU {
-            @display("p=150,140;b=10,10,oval");
-        }
-        rsu[5]: RSU {
-            @display("p=150,140;b=10,10,oval");
-        }
         rsu[6]: RSU {
             @display("p=150,140;b=10,10,oval");
         }
